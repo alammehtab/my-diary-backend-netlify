@@ -4,6 +4,7 @@ const { errorHandler } = require("./middleware/errorHandler");
 const connectDb = require("./config/db");
 const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 5000;
+var cors = require("cors");
 
 // connecting mongodb using mongoose
 connectDb();
@@ -15,10 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // cors
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+app.use(cors());
 
 // goals routes
 app.use("/api/v1/goals", require("./routes/goalsRoutes"));
