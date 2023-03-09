@@ -14,6 +14,11 @@ const app = express();
 // to get request body data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// cors
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 // goals routes
 app.use("/api/v1/goals", require("./routes/goalsRoutes"));
